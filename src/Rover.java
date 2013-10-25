@@ -6,24 +6,22 @@ public class Rover {
         this.direction = Direction.create(direction);
         this.position = new Position(x, y);
     }
-    
+
     public void receive(String commandSequence) {
         for (int i = 0; i < commandSequence.length(); ++i) {
-            String command = commandSequence.substring(i, i + 1);
-            receiveOneCommand(command);
+            String command = nextCommand(commandSequence, i);
+            receiveCommand(command);
         }
     }
 
-    private void receiveOneCommand(String command) {
-        if (isRotation(command)) {
-            direction = direction.rotate(command);
+    private void receiveCommand(String command) {
+        if (isRotationLeft(command)) {
+            direction = direction.rotateLeft();
+        } else if (isRotationRight(command)) {
+            direction = direction.rotateRight();
         } else {
             displace(command);
         }
-    }
-
-    private boolean isRotation(String command) {
-        return command.equals("l") || command.equals("r");
     }
 
     private void displace(String command) {
@@ -34,10 +32,27 @@ public class Rover {
     private int computeDisplacement(String command) {
         int displacement = -1;
 
-        if (command.equals("f")) {
+        if (isMoveForward(command)) {
             displacement = 1;
         }
         return displacement;
+    }
+
+    private String nextCommand(String commandSequence, int i) {
+        String command = commandSequence.substring(i, i + 1);
+        return command;
+    }
+    
+    private boolean isMoveForward(String command) {
+        return command.equals("f");
+    }
+
+    private boolean isRotationRight(String command) {
+        return command.equals("r");
+    }
+
+    private boolean isRotationLeft(String command) {
+        return command.equals("l");
     }
 
     @Override

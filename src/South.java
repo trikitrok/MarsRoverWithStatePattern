@@ -1,11 +1,13 @@
 public class South extends Direction {
+    
     @Override
-    public Direction rotate(String command) {
-        if (command.equals("r")) {
-            return new West();
-        } else {
-            return new East();
-        }
+    public Direction rotateRight() {
+        return new West();
+    }
+
+    @Override
+    public Direction rotateLeft() {
+        return new East();
     }
 
     @Override
