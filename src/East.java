@@ -2,9 +2,9 @@ public class East extends Direction {
     @Override
     public Direction rotate(String command) {
         if (command.equals("r")) {
-            return create("S");
+            return new South();
         } else {
-            return create("N");
+            return new North();
         }
     }
 
@@ -12,7 +12,7 @@ public class East extends Direction {
     public Position applyDisplacement(int displacement, Position position) {
         return new Position(position.getX() + displacement, position.getY());
     }
-    
+
     @Override
     public String toString() {
         return "Direction [direction= E]";

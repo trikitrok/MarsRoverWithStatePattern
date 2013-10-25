@@ -3,9 +3,9 @@ public class North extends Direction {
     @Override
     public Direction rotate(String command) {
         if (command.equals("r")) {
-            return create("E");
+            return new East();
         } else {
-            return create("W");
+            return new West();
         }
     }
     
